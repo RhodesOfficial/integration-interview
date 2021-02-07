@@ -1,0 +1,6 @@
+dubbo:
+  application:
+    name: hello
+  registry:
+    address: 224.5.6.7:1234
+    protocol: multicast
