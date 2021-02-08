@@ -2,12 +2,10 @@ server:
   port: 8082
 dubbo:
   application:
-    name: hello
+    name: hello-provider
   registry:
-    address: 224.5.6.7:1234
-    protocol: multicast
-  scan:
-    base-packages: com.calpis.interview.dubbo.service
+    address: 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+    protocol: zookeeper
   protocol:
     name: dubbo
     port: 20882
