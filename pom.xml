@@ -27,6 +27,7 @@
         <module>dubbo</module>
         <module>zookeeper</module>
         <module>spring</module>
+        <module>jdk</module>
     </modules>
 
     <dependencyManagement>
@@ -83,6 +84,11 @@
                 <groupId>org.apache.curator</groupId>
                 <artifactId>curator-recipes</artifactId>
                 <version>2.13.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>3.15.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
