@@ -8,6 +8,6 @@ dubbo:
     protocol: zookeeper
   protocol:
     name: dubbo
-    port: 20882
+    port: 20880
   config-center:
     timeout: 60000
