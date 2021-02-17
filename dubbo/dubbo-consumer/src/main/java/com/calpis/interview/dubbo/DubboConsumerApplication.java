@@ -26,6 +26,8 @@ public class DubboConsumerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println(helloService.sayHello("hello"));
+        while (true) {
+            System.out.println(helloService.sayHello("hello"));
+        }
     }
 }
