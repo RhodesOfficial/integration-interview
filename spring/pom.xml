@@ -16,6 +16,7 @@
         <module>redis</module>
         <module>base</module>
         <module>mmybatis</module>
+        <module>mvc</module>
     </modules>
 
     <dependencies>
