@@ -94,7 +94,7 @@ public class App {
                         throw new RuntimeException();
                 }
             }
-        }).start();
+        }, "schedule").start();
 
         Thread thread0 = new Thread(() -> {
             while (true) {
