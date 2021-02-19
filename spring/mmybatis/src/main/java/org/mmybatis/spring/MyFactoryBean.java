@@ -1,9 +1,8 @@
 package org.mmybatis.spring;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.lang.reflect.Proxy;
 
 /**
  * @Author Calpis
@@ -14,20 +13,20 @@ public class MyFactoryBean implements FactoryBean {
 
     private Class mapperClass;
 
-    private SqlSession sqlSession;
+//    private SqlSession sqlSession;
 
     public MyFactoryBean(Class mapperClass) {
         this.mapperClass = mapperClass;
     }
 
-    @Autowired
-    public void setSqlSession(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSession = sqlSessionFactory.openSession();
-    }
+//    @Autowired
+//    public void setSqlSession(SqlSessionFactory sqlSessionFactory) {
+//        this.sqlSession = sqlSessionFactory.openSession();
+//    }
 
     @Override
     public Object getObject() {
-        return sqlSession.getMapper(mapperClass);
+        return Proxy.newProxyInstance(MyFactoryBean.class.getClassLoader(), new Class[]{mapperClass}, (proxy, method, args) -> null);
     }
 
     @Override
