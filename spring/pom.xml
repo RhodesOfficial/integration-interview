@@ -17,6 +17,7 @@
         <module>base</module>
         <module>mmybatis</module>
         <module>mvc</module>
+        <module>netty</module>
     </modules>
 
     <dependencies>
