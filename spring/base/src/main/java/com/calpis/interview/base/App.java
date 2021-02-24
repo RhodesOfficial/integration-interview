@@ -1,13 +1,13 @@
 package com.calpis.interview.base;
 
-import com.calpis.interview.base.service.TestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
-import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @Author Calpis
@@ -17,27 +17,34 @@ import java.util.UUID;
 @SpringBootApplication
 public class App implements CommandLineRunner {
 
-    @Autowired
-    private UUID uuid;
+    private static InheritableThreadLocal<String> inheritableThreadLocal = new InheritableThreadLocal<>();
+    private static Lock lock = new ReentrantLock();
 
-    @Autowired
-    private TestService testService;
+    public static void main(String[] args) throws Exception {
+//        SpringApplication.run(App.class, args);
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        while (true) {
+            Thread.sleep(100);
+            // main2
+            executorService.submit(() -> {
+                lock.lock();
+                System.out.println("我拿到了");
+                while (true) {
 
-    public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+                }
+            });
+        }
     }
 
     @Override
     public void run(String... args) {
-        testService.hello();
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        while (true) {
+            executorService.submit(() -> {
+                lock.lock();
+                System.out.println("我拿到了");
+            });
+        }
     }
 
-    public void hello() {
-        System.out.println(this.uuid().equals(uuid));
-    }
-
-    @Bean
-    public UUID uuid() {
-        return UUID.randomUUID();
-    }
 }

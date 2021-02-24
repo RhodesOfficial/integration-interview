@@ -34,6 +34,9 @@
 
 package com.calpis.interview.algorithm.leetcode.editor.cn;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /*
  * todo dp和双指针待完善
  */
@@ -65,32 +68,32 @@ class Solution {
     /*
      * 单调栈
      */
-//    public int trap(int[] height) {
-//        int ans = 0;
-//        Deque<Integer> stack = new ArrayDeque<>();
-//        // 从左往右,左比右低就能接到雨水
-//        for (int i = 0; i < height.length; i++) {
-//            // 当出现高于栈顶的柱子时,说明可以对前面的柱子结算了
-//            while (!stack.isEmpty() && height[stack.peek()] < height[i]) {
-//                // bottom -> stack.pop()
-//                // left -> 新的栈顶
-//                // right -> i
-//                int bottom = stack.pop();
-//                if (stack.isEmpty()) {
-//                    break;
-//                }
-//                int left = stack.peek();
-//                int right = i;
-//                // height = Math.min(left, right) - bottom
-//                int h = Math.min(height[left], height[right]) - height[bottom];
-//                int w = right - left - 1;
-//                ans += h * w;
-//            }
-//            // 对更低的柱子入栈
-//            stack.push(i);
-//        }
-//        return ans;
-//    }
+    public int trap(int[] height) {
+        int ans = 0;
+        Deque<Integer> stack = new ArrayDeque<>();
+        // 从左往右,左比右低就能接到雨水
+        for (int i = 0; i < height.length; i++) {
+            // 当出现高于栈顶的柱子时,说明可以对前面的柱子结算了
+            while (!stack.isEmpty() && height[stack.peek()] < height[i]) {
+                // bottom -> stack.pop()
+                // left -> 新的栈顶
+                // right -> i
+                int bottom = stack.pop();
+                if (stack.isEmpty()) {
+                    break;
+                }
+                int left = stack.peek();
+                int right = i;
+                // height = Math.min(left, right) - bottom
+                int h = Math.min(height[left], height[right]) - height[bottom];
+                int w = right - left - 1;
+                ans += h * w;
+            }
+            // 对更低的柱子入栈
+            stack.push(i);
+        }
+        return ans;
+    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
