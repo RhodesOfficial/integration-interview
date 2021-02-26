@@ -30,6 +30,14 @@ public class EchoServer {
             sslCtx = null;
         }
 
+        /*
+         * 1. MultithreadEventExecutorGroup
+         *      executor = new ThreadPerTaskExecutor(newDefaultThreadFactory());
+         *      children[i] = newChild(executor, args); // create EventLoop
+         * 2. NioEventLoop#SingleThreadEventExecutor execute // 第一次添加任务的时候被启动 此时executor是ThreadPerTaskExecutor
+         * 3. ThreadPerTaskExecutor#execute DefaultThreadFactory FastThreadLocalThread
+         * 4. SingleThreadEventExecutor.this.run()
+         */
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         final EchoServerHandler serverHandler = new EchoServerHandler();
