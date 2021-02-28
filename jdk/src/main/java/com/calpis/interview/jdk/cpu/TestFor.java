@@ -7,10 +7,15 @@ package com.calpis.interview.jdk.cpu;
  */
 public class TestFor {
 
-    public static void main(String[] args) {
-        int random = 0;
-        while (random < 100) {
-            random = random * 10;
+    public static void main(String[] args) throws Exception {
+
+        while (true) {
+            Thread.sleep(1000);
         }
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
     }
 }
