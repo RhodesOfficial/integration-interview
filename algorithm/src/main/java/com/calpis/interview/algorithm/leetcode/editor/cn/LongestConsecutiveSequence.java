@@ -44,7 +44,7 @@ public class LongestConsecutiveSequence {
       //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int longestConsecutive(int[] nums) {
-        Set<Integer> set = new HashSet<Integer>((int) (nums.length / 0.75) + 1);
+        Set<Integer> set = new HashSet<>((int) (nums.length / 0.75) + 1);
         for (int num : nums) {
             set.add(num);
         }

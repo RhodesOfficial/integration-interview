@@ -21,7 +21,6 @@ public class MyApplication {
 
     @Bean
     public SqlSessionFactory sqlSessionFactory() {
-        // todo
         return new DefaultSqlSessionFactory(new Configuration());
     }
 
