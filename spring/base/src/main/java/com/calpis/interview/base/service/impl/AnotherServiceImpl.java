@@ -6,24 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @author Zhujialiang
- * @version V1.0
+ * @Author Calpis
  * @Description
- * @Date 2021/2/19 17:59
- * @Copyright Copyright © 2020 深圳花儿绽放网络科技股份有限公司. All rights reserved.
+ * @Date 2021/2/28 21:09
  */
 @Service
-public class TestServiceImpl implements TestService {
-
-//    @Autowired
-//    private App app;
+public class AnotherServiceImpl implements AnotherService {
 
     @Autowired
-    private AnotherService anotherService;
+    private TestService testService;
 
     @Override
-    public void hello() {
-//        app.hello();
+    public void sayHello() {
+        testService.hello();
         System.out.println("hello");
     }
 }

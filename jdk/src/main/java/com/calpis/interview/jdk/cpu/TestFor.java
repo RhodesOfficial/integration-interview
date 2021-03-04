@@ -1,5 +1,7 @@
 package com.calpis.interview.jdk.cpu;
 
+import java.lang.reflect.Proxy;
+
 /**
  * @Author Calpis
  * @Description
@@ -8,9 +10,8 @@ package com.calpis.interview.jdk.cpu;
 public class TestFor {
 
     public static void main(String[] args) throws Exception {
-
-        while (true) {
-            Thread.sleep(1000);
+        for (int i = 0; i < 100; i++) {
+            System.out.println(i);
         }
     }
 

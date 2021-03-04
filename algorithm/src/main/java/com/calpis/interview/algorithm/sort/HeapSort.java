@@ -24,7 +24,7 @@ public class HeapSort {
     }
 
     private static void buildMaxHeap(int[] arr, int len) {
-        for (int i = len / 2 - 1; i >= 0; i--) {
+        for (int i = (len - 1) / 2 ; i >= 0; i--) {
             heapify(arr, i, len);
         }
     }

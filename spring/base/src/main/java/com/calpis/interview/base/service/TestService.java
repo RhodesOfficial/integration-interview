@@ -1,5 +1,7 @@
 package com.calpis.interview.base.service;
 
+import org.springframework.stereotype.Service;
+
 /**
  * @author Zhujialiang
  * @version V1.0
