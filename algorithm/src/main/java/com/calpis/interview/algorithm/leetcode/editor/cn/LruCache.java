@@ -58,6 +58,7 @@
 package com.calpis.interview.algorithm.leetcode.editor.cn;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class LruCache {
       public static void main(String[] args) {
@@ -66,7 +67,7 @@ public class LruCache {
       //leetcode submit region begin(Prohibit modification and deletion)
 class LRUCache {
 
-    private HashMap<Integer, Node> map;
+    private Map<Integer, Node> map;
     private DoubleList list;
     private int capacity;
 
