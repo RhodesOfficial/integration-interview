@@ -7,9 +7,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.SelfSignedCertificate;
 
 /**
  * @Author Calpis
@@ -18,26 +15,9 @@ import io.netty.handler.ssl.util.SelfSignedCertificate;
  */
 public class EchoServer {
 
-    static final boolean SSL = System.getProperty("ssl") != null;
     static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
 
     public static void main(String[] args) throws Exception {
-        final SslContext sslCtx;
-        if (SSL) {
-            SelfSignedCertificate ssc = new SelfSignedCertificate();
-            sslCtx = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey()).build();
-        } else {
-            sslCtx = null;
-        }
-
-        /*
-         * 1. MultithreadEventExecutorGroup
-         *      executor = new ThreadPerTaskExecutor(newDefaultThreadFactory());
-         *      children[i] = newChild(executor, args); // create EventLoop
-         * 2. NioEventLoop#SingleThreadEventExecutor execute // 第一次添加任务的时候被启动 此时executor是ThreadPerTaskExecutor
-         * 3. ThreadPerTaskExecutor#execute DefaultThreadFactory FastThreadLocalThread
-         * 4. SingleThreadEventExecutor.this.run()
-         */
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         final EchoServerHandler serverHandler = new EchoServerHandler();
@@ -45,17 +25,21 @@ public class EchoServer {
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
+                    /*
+                     * 设置了channelFactory
+                     * 调用newChannel()方法会实例化NioServerSocketChannel.class
+                     * 对于Server bind()方法会进行实例化
+                     */
                     .channel(NioServerSocketChannel.class)
+                    /*
+                     * TCP参数 min(backlog,somaxconn) 调整accept队列长度
+                     */
                     .option(ChannelOption.SO_BACKLOG, 100)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) {
                             ChannelPipeline p = ch.pipeline();
-                            if (sslCtx != null) {
-                                p.addLast(sslCtx.newHandler(ch.alloc()));
-                            }
-
                             p.addLast(serverHandler);
                         }
             });

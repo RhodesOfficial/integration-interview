@@ -7,14 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @Author Calpis
  * @Description
- * @Date 2021/2/8 0:17
+ * @Date 2021/3/6 23:41
  */
-@EnableDubbo(scanBasePackages = "com.calpis.interview.dubbo.service.impl")
+@EnableDubbo(scanBasePackages = "com.calpis.interview.dubbo")
 @SpringBootApplication
-public class DubboProviderApplication {
+public class DubboMonitorApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DubboProviderApplication.class, args);
+        SpringApplication.run(DubboMonitorApplication.class, args);
     }
-
 }

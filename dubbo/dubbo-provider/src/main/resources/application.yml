@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: ${random.int[10000,19999]}
 dubbo:
   application:
     name: hello-provider
@@ -8,6 +8,4 @@ dubbo:
     protocol: zookeeper
   protocol:
     name: dubbo
-    port: 20883
-  config-center:
-    timeout: 60000
+    port: ${random.int[20880,30880]}
