@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class VolatileTest {
 
-    public static volatile int flag = 0;
+    public static int flag = 0;
+    public static int test = 0;
 
     public static void main(String[] args) throws Exception {
         Thread thread1 = new Thread(() -> {

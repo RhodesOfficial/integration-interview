@@ -1,5 +1,8 @@
 package com.calpis.interview.algorithm;
 
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 /**
  * @Author Calpis
  * @Description
@@ -7,15 +10,12 @@ package com.calpis.interview.algorithm;
  */
 public class Test {
 
+    private static final ReadWriteLock rw = new ReentrantReadWriteLock();
+
     public static void main(String[] args) {
-        System.out.println(recursion(100));
+        rw.readLock().lock();
+        rw.writeLock().lock();
     }
 
-    private static int recursion(int n) {
-        if (n == 1) {
-            return 1;
-        }
-        n += recursion(n - 1);
-        return n;
-    }
+
 }
