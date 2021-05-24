@@ -56,7 +56,6 @@
 // Related Topics 数组 双指针 二分查找 
 // 👍 1119 👎 0
 
-// todo
 package com.calpis.interview.algorithm.leetcode.editor.cn;
 public class FindTheDuplicateNumber {
       public static void main(String[] args) {

@@ -1,3 +1,5 @@
 spring:
   aop:
     proxy-target-class: false
+  redis:
+    password: 123456

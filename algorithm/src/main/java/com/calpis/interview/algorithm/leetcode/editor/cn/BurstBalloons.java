@@ -45,8 +45,24 @@ public class BurstBalloons {
 class Solution {
 
     public int maxCoins(int[] nums) {
-        // todo
-        return 0;
+        // dp[i][j] -> (i,j)内能拿到的最多的金币
+        // dp[i][j] 受到dp[i][k]与dp[k][j]控制
+        // total = dp[i][k] + nums[i] * nums[k] * nums[j] + dp[k][j]
+        int n = nums.length;
+        int[] temp = new int[n + 2];
+        temp[0] = 1;
+        temp[n + 1] = 1;
+        System.arraycopy(nums, 0, temp, 1, n);
+        int[][] dp = new int[n + 2][n + 2];
+        for (int i = n; i >= 0; i--) {
+            for (int j = 0; j < n + 2; j++) {
+                for (int k = i + 1; k < j; k++) {
+                    dp[i][j] = Math.max(dp[i][j],
+                            dp[i][k] + temp[i] * temp[k] * temp[j] + dp[k][j]);
+                }
+            }
+        }
+        return dp[0][n + 1];
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

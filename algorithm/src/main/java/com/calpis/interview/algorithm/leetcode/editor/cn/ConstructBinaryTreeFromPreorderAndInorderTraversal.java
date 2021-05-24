@@ -24,8 +24,6 @@ package com.calpis.interview.algorithm.leetcode.editor.cn;
 import com.calpis.interview.algorithm.common.TreeNode;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
       public static void main(String[] args) {
@@ -49,9 +47,6 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
  */
 class Solution {
 
-    private final Map<Integer, Integer> memo = new HashMap<>();
-
-    // todo 好难
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         if (preorder.length == 0 || inorder.length == 0) {
             return null;
@@ -60,22 +55,18 @@ class Solution {
         TreeNode root = new TreeNode(preorder[0]);
         // 划分左右
         int idx = index(inorder, preorder[0]);
-        // 递归
+        // 左子树
         root.left = buildTree(Arrays.copyOfRange(preorder, 1, idx + 1), Arrays.copyOfRange(inorder, 0, idx));
+        // 右子树
         root.right = buildTree(Arrays.copyOfRange(preorder, idx + 1, preorder.length), Arrays.copyOfRange(inorder, idx + 1, inorder.length));
         return root;
     }
 
     private int index(int[] arr, int i) {
-        if (memo.containsKey(i)) {
-            return memo.get(i);
-        }
         int idx = 0;
         while (arr[idx] != i) {
             idx++;
         }
-//        return idx;
-        memo.put(i, idx);
         return idx;
     }
 
